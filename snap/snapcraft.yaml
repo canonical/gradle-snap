@@ -46,7 +46,6 @@ parts:
   gradle:
     after: [java]
     plugin: nil
-    # renovate: regex:^source: https:\/\/services\.gradle\.org\/distributions\/gradle-([\d\.]+)-bin\.zip$ depName=gradle datasource=github-releases packageName=gradle/gradle
     source: https://services.gradle.org/distributions/gradle-8.14.2-bin.zip
     override-build: |
       version=$($SNAPCRAFT_PART_SRC/gradle-*/bin/gradle -qv|awk '/Gradle/{print $2}')
