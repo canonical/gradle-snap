@@ -3,15 +3,15 @@
     "extends": [
         "config:recommended"
     ],
-    "regexManagers": [
+    "customManagers": [
     {
-      "fileMatch": ["^snap/snapcraft\\.yaml$"],
+      "customType": "regex",
+      "fileMatch": ["/^snap/snapcraft\\.yaml$/"],
       "matchStrings": [
-        "source: https:\\/\\/services\\.gradle\\.org\\/distributions\\/gradle-([\\d\\.]+)-bin\\.zip"
+        "source: https:\\/\\/services\\.gradle\\.org\\/distributions\\/gradle-(?<currentValue>[\\d\\.]+)-bin\\.zip"
       ],
       "depNameTemplate": "gradle",
-      "datasourceTemplate": "github-releases",
-      "packageNameTemplate": "gradle/gradle"
+      "datasourceTemplate": "gradle-version"
     }
   ]
 }
