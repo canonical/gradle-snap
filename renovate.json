@@ -10,7 +10,7 @@
         "source: https:\\/\\/services\\.gradle\\.org\\/distributions\\/gradle-([\\d\\.]+)-bin\\.zip"
       ],
       "depNameTemplate": "gradle",
-      "datasourceTemplate": "github-releases",
+      "datasourceTemplate": "gradle-version",
       "packageNameTemplate": "gradle/gradle"
     }
   ]
