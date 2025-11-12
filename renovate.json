@@ -2,5 +2,16 @@
     "$schema": "https://docs.renovatebot.com/renovate-schema.json",
     "extends": [
         "config:recommended"
-    ]
+    ],
+    "regexManagers": [
+    {
+      "matchFileNames": ["snap/snapcraft.yaml"],
+      "matchStrings": [
+        "source: https:\\/\\/services\\.gradle\\.org\\/distributions\\/gradle-([\\d\\.]+)-bin\\.zip"
+      ],
+      "depNameTemplate": "gradle",
+      "datasourceTemplate": "github-releases",
+      "packageNameTemplate": "gradle/gradle"
+    }
+  ]
 }
