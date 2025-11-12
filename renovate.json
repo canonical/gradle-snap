@@ -6,9 +6,9 @@
     "customManagers": [
     {
       "customType": "regex",
-      "fileMatch": ["/^snap/snapcraft\\.yaml$/"],
+      "managerFilePatterns": ["snap/snapcraft.yaml"],
       "matchStrings": [
-        "source: https:\\/\\/services\\.gradle\\.org\\/distributions\\/gradle-(?<currentValue>[\\d\\.]+)-bin\\.zip"
+        "https:\\/\\/services\\.gradle\\.org\\/distributions\\/gradle-(?<currentValue>[\\d\\.]+)-bin\\.zip"
       ],
       "depNameTemplate": "gradle",
       "datasourceTemplate": "gradle-version"
