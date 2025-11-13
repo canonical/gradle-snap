@@ -1,0 +1,66 @@
+name: Build on main
+
+on:
+  push:
+    branches: main
+  workflow_dispatch:
+
+permissions:
+  checks: write
+  pull-requests: write
+
+jobs:
+
+  snapcraft-build:
+    strategy:
+      matrix:
+        arch: [arm64, amd64, armhf, ppc64el, s390x]
+    runs-on: self-hosted-linux-${{ matrix.arch }}-noble-large
+    steps:
+      - uses: actions/checkout@v5
+        id: checkout
+
+      - name: Build devpack
+        id: gradle
+        uses: snapcore/action-build@v1
+        with:
+          path: .
+
+      - name: Upload Snap to workflow artifacts
+        id: upload-artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: gradle-${{ matrix.arch }}
+          path: ${{ steps.gradle.outputs.snap }}
+
+  snapcraft-publish:
+    runs-on: ubuntu-latest
+    if: ${{ (contains(fromJSON('["push"]'), github.event_name) && github.ref_name == 'main') || contains(fromJSON('["workflow_dispatch"]'), github.event_name)  }}
+    needs: snapcraft-build
+    strategy:
+      matrix:
+        artifact-name:
+          - gradle
+        arch: [arm64, amd64, armhf, ppc64el, s390x]
+    steps:
+      - uses: actions/download-artifact@v5
+        id: download-artifact
+        with:
+          name: ${{ matrix.artifact-name }}-${{ matrix.arch }}
+
+      - name: Gather filename
+        id: gather-filename
+        env:
+          ARTIFACT_PATH: ${{ steps.download-artifact.outputs.download-path }}
+        run: |
+          set -ex
+          ls -la $ARTIFACT_PATH
+          SNAP_FILE_NAME=$(ls ${ARTIFACT_PATH}/gradle*.snap)
+          echo "SNAP_PATH=${SNAP_FILE_NAME}" >> "$GITHUB_OUTPUT"
+
+      - uses: snapcore/action-publish@v1
+        env:
+          SNAPCRAFT_STORE_CREDENTIALS: ${{ secrets.SNAPSTORE_LOGIN }}
+        with:
+          snap: ${{ steps.gather-filename.outputs.SNAP_PATH }}
+          release: edge
