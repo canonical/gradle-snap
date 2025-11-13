@@ -18,6 +18,13 @@ description: |
   and Groovy, and is closely integrated with development tools and continuous
   integration servers including Eclipse, IntelliJ, and Jenkins.
 
+platforms:
+  amd64:
+  arm64:
+  armhf:
+  ppc64el:
+  s390x:
+
 apps:
   gradle:
     command: cli.sh
