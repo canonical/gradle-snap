@@ -20,7 +20,7 @@ jobs:
       - uses: actions/checkout@v5
         id: checkout
 
-      - name: Build devpack
+      - name: Build
         id: gradle
         uses: snapcore/action-build@v1
         with:
