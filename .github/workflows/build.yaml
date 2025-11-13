@@ -49,7 +49,7 @@ jobs:
           name: ${{ matrix.artifact-name }}-${{ matrix.arch }}
 
       - name: Gather filename
-        id: gather-filename-devpack
+        id: gather-filename
         env:
           ARTIFACT_PATH: ${{ steps.download-artifact.outputs.download-path }}
         run: |
@@ -62,5 +62,5 @@ jobs:
         env:
           SNAPCRAFT_STORE_CREDENTIALS: ${{ secrets.SNAPSTORE_LOGIN }}
         with:
-          snap: ${{ steps.gather-filename-devpack.outputs.SNAP_PATH }}
-          release:  edge
+          snap: ${{ steps.gather-filename.outputs.SNAP_PATH }}
+          release: edge
