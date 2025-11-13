@@ -28,7 +28,7 @@ jobs:
 
       - name: Upload Snap to workflow artifacts
         id: upload-artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: gradle-${{ matrix.arch }}
           path: ${{ steps.gradle.outputs.snap }}
@@ -43,7 +43,7 @@ jobs:
           - gradle
         arch: [arm64, amd64, armhf, ppc64el, s390x]
     steps:
-      - uses: actions/download-artifact@v5
+      - uses: actions/download-artifact@v6
         id: download-artifact
         with:
           name: ${{ matrix.artifact-name }}-${{ matrix.arch }}
