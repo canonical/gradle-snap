@@ -18,12 +18,12 @@ description: |
   and Groovy, and is closely integrated with development tools and continuous
   integration servers including Eclipse, IntelliJ, and Jenkins.
 
-platforms:
-  amd64:
-  arm64:
-  armhf:
-  ppc64el:
-  s390x:
+architectures:
+  - build-on: s390x
+  - build-on: ppc64el
+  - build-on: arm64
+  - build-on: armhf
+  - build-on: amd64
 
 apps:
   gradle:
@@ -53,7 +53,7 @@ parts:
   gradle:
     after: [java]
     plugin: nil
-    source: https://services.gradle.org/distributions/gradle-8.14.2-bin.zip
+    source: https://services.gradle.org/distributions/gradle-6.9.4-bin.zip
     override-build: |
       version=$($SNAPCRAFT_PART_SRC/gradle-*/bin/gradle -qv|awk '/Gradle/{print $2}')
 
