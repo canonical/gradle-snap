@@ -14,7 +14,7 @@ jobs:
   snapcraft-build:
     strategy:
       matrix:
-        arch: [arm64, amd64, armhf, ppc64el, s390x]
+        arch: [arm64, amd64]
     runs-on: self-hosted-linux-${{ matrix.arch }}-noble-large
     steps:
       - uses: actions/checkout@v5
@@ -41,7 +41,7 @@ jobs:
       matrix:
         artifact-name:
           - gradle
-        arch: [arm64, amd64, armhf, ppc64el, s390x]
+        arch: [arm64, amd64]
     steps:
       - uses: actions/download-artifact@v6
         id: download-artifact
