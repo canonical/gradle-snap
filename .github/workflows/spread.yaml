@@ -23,7 +23,7 @@ jobs:
           isClassic: 'true'
       - name: Upload Snap to workflow artifacts
         id: upload-artifact
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         with:
           name: gradle-snap
           path: ${{ steps.gradle-snap.outputs.snap }}
@@ -43,7 +43,7 @@ jobs:
           submodules: true
 
       - name: Download snap artifact
-        uses: actions/download-artifact@v6
+        uses: actions/download-artifact@v7
         with:
           name: gradle-snap
           path: .
