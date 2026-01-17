@@ -53,7 +53,7 @@ parts:
   gradle:
     after: [java]
     plugin: nil
-    source: https://services.gradle.org/distributions/gradle-9.2.1-bin.zip
+    source: https://services.gradle.org/distributions/gradle-9.3.0-bin.zip
     override-build: |
       version=$($SNAPCRAFT_PART_SRC/gradle-*/bin/gradle -qv|awk '/Gradle/{print $2}')
 
