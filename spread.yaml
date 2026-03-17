@@ -14,4 +14,4 @@ suites:
 prepare: |
   set -ex
   # install gradle snap
-  snap install --dangerous --classic gradle_*_amd64.snap
+  snap install --dangerous --classic gradle_*_$(dpkg --print-architecture).snap
